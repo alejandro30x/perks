@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club de Conocimiento × Global66</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid #1e1e1e;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .sep { color: #333; font-size: 20px; }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #00c896;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: #00c896; }
+
+    .lead {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #aaa;
+      margin-bottom: 40px;
+      max-width: 580px;
+    }
+
+    .perk-box {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-left: 3px solid #00c896;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 52px;
+    }
+
+    .perk-box .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #00c896;
+      margin-bottom: 10px;
+    }
+
+    .perk-box p {
+      font-size: 15px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .perk-box strong { color: #f0f0f0; }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 28px;
+      color: #f0f0f0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 520px) {
+      .row { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    input, select {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: #f0f0f0;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+      appearance: none;
+    }
+
+    input::placeholder { color: #444; }
+
+    input:focus, select:focus {
+      border-color: #00c896;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option { background: #111; }
+
+    .optgroup-label {
+      font-size: 11px;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    button[type="submit"] {
+      background: #00c896;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-top: 8px;
+      align-self: flex-start;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    button[type="submit"]:active { transform: translateY(0); }
+
+    .disclaimer {
+      font-size: 12px;
+      color: #444;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    #success {
+      display: none;
+      background: #0d1f1a;
+      border: 1px solid #00c896;
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #success h3 { color: #00c896; margin-bottom: 8px; }
+    #success p { color: #aaa; font-size: 15px; }
+
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="badge">Club de Conocimiento</span>
+    <span class="sep">×</span>
+    <span class="badge">Global66</span>
+  </header>
+
+  <main>
+    <span class="tag">Alianza exclusiva</span>
+    <h1>Mueve tu dinero al mundo.<br /><span>Con menos costo.</span></h1>
+    <p class="lead">
+      Si tu empresa opera con pagos internacionales, tenemos algo para ti. Los miembros del Club de Conocimiento acceden a condiciones preferenciales en Global66, la plataforma líder de cambio de divisas para empresas en Latinoamérica.
+    </p>
+
+    <div class="perk-box">
+      <div class="label">Tu beneficio</div>
+      <p><strong>30% de descuento en costos de tipo de cambio</strong> sobre tu primera transacción, hasta <strong>USD 99.000</strong>.<br />Exclusivo para nuevos clientes de Global66.</p>
+    </div>
+
+    <h2>Registra tu empresa</h2>
+
+    <form id="form" action="https://formspree.io/f/maqlzqro" method="POST">
+
+      <div class="row">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Alejandro" required />
+        </div>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@empresa.com" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000" required />
+        </div>
+        <div class="field">
+          <label for="empresa">Empresa</label>
+          <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="icp">¿En qué sector opera tu empresa?</label>
+        <select id="icp" name="icp" required>
+          <option value="" disabled selected>Selecciona un sector</option>
+          <optgroup label="── Importación ──">
+            <option value="Importación – Maquinaria">Maquinaria</option>
+            <option value="Importación – Autopartes">Autopartes (neumáticos, repuestos)</option>
+            <option value="Importación – Insumos médicos">Insumos médicos y farmacéuticos</option>
+            <option value="Importación – Cosmética">Cosmética y belleza</option>
+            <option value="Importación – Tecnología">Tecnología y electrónica</option>
+            <option value="Importación – Mobiliario">Mobiliario y decoración</option>
+            <option value="Importación – Entretenimiento">Artículos y entretenimiento</option>
+            <option value="Importación – Alimentos">Alimentos y materias primas</option>
+            <option value="Importación – Textiles">Textiles, accesorios y ropa deportiva</option>
+            <option value="Importación – Químicos">Productos químicos y materias primas</option>
+          </optgroup>
+          <optgroup label="── Exportación ──">
+            <option value="Exportación – Café">Café</option>
+            <option value="Exportación – Textiles">Textiles y accesorios</option>
+            <option value="Exportación – Flores">Flores</option>
+            <option value="Exportación – Alimentos">Alimentos y materias primas</option>
+          </optgroup>
+          <optgroup label="── Servicios ──">
+            <option value="Servicios – Viajes">Viajes y hotelería</option>
+            <option value="Servicios – Publicidad">Publicidad y marketing</option>
+            <option value="Servicios – Comunicaciones">Comunicaciones</option>
+            <option value="Servicios – Contable">Contable</option>
+            <option value="Servicios – Financiero">Financiero</option>
+            <option value="Servicios – Legal">Abogados</option>
+            <option value="Servicios – TI">TI y desarrollo de software</option>
+            <option value="Servicios – BPO">BPO</option>
+            <option value="Servicios – Ciberseguridad">Ciberseguridad</option>
+          </optgroup>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <input type="hidden" name="_subject" value="Nuevo registro – Global66 × Club de Conocimiento" />
+      <input type="hidden" name="_next" value="about:blank" />
+
+      <button type="submit">Quiero mi descuento →</button>
+
+      <p class="disclaimer">
+        Solo compartiremos tu información con Global66 para gestionar este beneficio. Sin spam.
+      </p>
+    </form>
+
+    <div id="success">
+      <h3>¡Listo!</h3>
+      <p>Recibimos tu información. En los próximos días alguien de Global66 se pondrá en contacto contigo.</p>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Club de Conocimiento. Alianza comercial con Global66.
+  </footer>
+
+  <script>
+    const form = document.getElementById('form');
+    const success = document.getElementById('success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.textContent = 'Error. Intenta de nuevo.';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Error. Intenta de nuevo.';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
